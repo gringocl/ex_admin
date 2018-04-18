@@ -93,7 +93,7 @@ defmodule ExAdmin.CSV do
       def build_csv(resources) do
         var!(columns, ExAdmin.CSV) = []
         unquote(block)
-        case var!(columns, ExAdmin.CSV) do
+        case Macro.expand(var!(columns, ExAdmin.CSV), __ENV__) do
           [] ->
             unquote(block)
             |> ExAdmin.CSV.build_csv(resources, unquote(opts))
